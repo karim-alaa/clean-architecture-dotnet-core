@@ -1,17 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Models;
-using Services.Interfaces;
-using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
 using GlobalHelpers.Helpers;
-using SharedConfig.Messages;
+using Microsoft.AspNetCore.Mvc;
+using Models;
 using Models.ViewModels;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Services.Interfaces;
+using SharedConfig.Messages;
+using System;
+using System.Threading.Tasks;
 
 namespace APIs.Controllers
 {
@@ -21,7 +16,7 @@ namespace APIs.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IUserService _userService;
-        public UsersController(IMapper Mapper,IUserService UserService)
+        public UsersController(IMapper Mapper, IUserService UserService)
         {
             this._mapper = Mapper;
             this._userService = UserService;

@@ -1,14 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Models;
-using Services.Interfaces;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Models.ViewModels;
+using Services.Interfaces;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace APIs.Controllers
 {
@@ -18,7 +14,7 @@ namespace APIs.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IBookService _bookService;
-        public BooksController(IMapper Mapper,IBookService BookService)
+        public BooksController(IMapper Mapper, IBookService BookService)
         {
             this._mapper = Mapper;
             this._bookService = BookService;

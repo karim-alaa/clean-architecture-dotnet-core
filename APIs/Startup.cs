@@ -1,33 +1,29 @@
+using APIs.Jobs;
+using APIs.Utilities;
+using DataAccessLayer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DataAccessLayer;
-using Services;
-using Newtonsoft.Json.Serialization;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using System.Text;
-using System.IO;
-using SharedConfig.Config;
-using APIs.Utilities;
-using Serilog;
-using SharedConfig.Middlewares.Logging;
-using Microsoft.AspNetCore.Http;
 using Microsoft.OpenApi.Models;
-using APIs.Jobs;
-using Quartz.Spi;
-using RechargeAutoAction.Jobs.ManageRechargeCases;
 using Quartz;
 using Quartz.Impl;
+using Quartz.Spi;
+using RechargeAutoAction.Jobs.ManageRechargeCases;
+using Serilog;
+using Services;
+using SharedConfig.Config;
+using SharedConfig.Middlewares.Logging;
+using System;
+using System.IO;
+using System.Linq;
 using System.Reflection;
+using System.Text;
 
 namespace WebApplication2
 {
@@ -49,7 +45,7 @@ namespace WebApplication2
             _config = Configuration.Get<AppConfig>();
 
             services.AddAutoMapper(typeof(Startup));
-            
+
             services.AddControllers();
             services.AddSingleton(_config);
             services.AddSingleton<ICustomLoggingConfig, CustomLoggingConfig>();
@@ -129,7 +125,7 @@ namespace WebApplication2
             services.AddHostedService<QuartzHostedService>();
 
             // Add our jobs
-            services.AddTransient <StayAliveJob>();
+            services.AddTransient<StayAliveJob>();
             services.AddSingleton(new JobSchedule(jobType: typeof(StayAliveJob),
                 cronExpression: "0 0/15 * 1/1 * ? *"));
         }
@@ -163,7 +159,8 @@ namespace WebApplication2
                 .AllowAnyMethod()
                 .AllowAnyHeader());
 
-            app.Use(async (context, next) => {
+            app.Use(async (context, next) =>
+            {
                 context.Request.EnableBuffering();
                 await next();
             });

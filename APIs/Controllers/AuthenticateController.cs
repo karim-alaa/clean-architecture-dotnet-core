@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Models;
+using Models.ViewModels;
 using Services.Interfaces;
 using SharedConfig.Config;
 using SharedConfig.Messages;
-using Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
