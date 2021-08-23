@@ -19,7 +19,7 @@ namespace DataAccessLayer.Migrations
                 .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Models.Book", b =>
+            modelBuilder.Entity("Models.Channel", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -28,7 +28,7 @@ namespace DataAccessLayer.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsDeleted")
+                    b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -39,49 +39,835 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Books");
+                    b.ToTable("Channels");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("aa055fff-7961-4e70-847f-4afb90a2d8ac"),
-                            CreatedAt = new DateTime(2021, 5, 24, 16, 44, 48, 525, DateTimeKind.Local).AddTicks(815),
-                            IsDeleted = false,
-                            Name = "Book 1",
-                            UpdatedAt = new DateTime(2021, 5, 24, 16, 44, 48, 526, DateTimeKind.Local).AddTicks(5357)
+                            Id = new Guid("0afa33f7-a29b-4f66-9e81-b16ea32fe90b"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = false,
+                            Name = "SHOP",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("0ab852ce-9a81-4ee7-80dc-0af3f465657a"),
-                            CreatedAt = new DateTime(2021, 5, 24, 16, 44, 48, 526, DateTimeKind.Local).AddTicks(6165),
-                            IsDeleted = false,
-                            Name = "Book 2",
-                            UpdatedAt = new DateTime(2021, 5, 24, 16, 44, 48, 526, DateTimeKind.Local).AddTicks(6171)
-                        },
-                        new
-                        {
-                            Id = new Guid("a777ab97-019c-47a7-b178-5ad62d3b9fd2"),
-                            CreatedAt = new DateTime(2021, 5, 24, 16, 44, 48, 526, DateTimeKind.Local).AddTicks(6175),
-                            IsDeleted = false,
-                            Name = "Book 3",
-                            UpdatedAt = new DateTime(2021, 5, 24, 16, 44, 48, 526, DateTimeKind.Local).AddTicks(6177)
-                        },
-                        new
-                        {
-                            Id = new Guid("034441e8-13e9-47a2-9a98-1a60ddcbf081"),
-                            CreatedAt = new DateTime(2021, 5, 24, 16, 44, 48, 526, DateTimeKind.Local).AddTicks(6180),
-                            IsDeleted = false,
-                            Name = "Book 4",
-                            UpdatedAt = new DateTime(2021, 5, 24, 16, 44, 48, 526, DateTimeKind.Local).AddTicks(6181)
-                        },
-                        new
-                        {
-                            Id = new Guid("1144b90a-678d-41bc-ab63-e489c7566dfa"),
-                            CreatedAt = new DateTime(2021, 5, 24, 16, 44, 48, 526, DateTimeKind.Local).AddTicks(6184),
-                            IsDeleted = true,
-                            Name = "Book 5",
-                            UpdatedAt = new DateTime(2021, 5, 24, 16, 44, 48, 526, DateTimeKind.Local).AddTicks(6185)
+                            Id = new Guid("dac7f348-95d7-43d9-86e0-d2d5fdd5ea83"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = false,
+                            Name = "APP",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
+                });
+
+            modelBuilder.Entity("Models.Customer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("MerchantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Password")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Salt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ServiceName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MerchantId");
+
+                    b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("Models.CustomerAddress", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ApartmentNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BuildingNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("FloorNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Mark")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("MerchantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Zone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("MerchantId");
+
+                    b.ToTable("CustomerAddresses");
+                });
+
+            modelBuilder.Entity("Models.CustomerBill", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ChannelId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("CreatedByUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CustomerBillTypeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("DeliveryPersonId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("DueAmount")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPaid")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("MerchantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("PaymentReceivedByUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("Service")
+                        .HasColumnType("float");
+
+                    b.Property<string>("TableNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Taxation")
+                        .HasColumnType("float");
+
+                    b.Property<double>("TotalAmount")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChannelId");
+
+                    b.HasIndex("CreatedByUserId");
+
+                    b.HasIndex("CustomerBillTypeId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("DeliveryPersonId");
+
+                    b.HasIndex("MerchantId");
+
+                    b.HasIndex("PaymentReceivedByUserId");
+
+                    b.ToTable("CustomerBills");
+                });
+
+            modelBuilder.Entity("Models.CustomerBillItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CustomerBillId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("DueAmount")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("MerchantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ProductUnitId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("Quantity")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Taxation")
+                        .HasColumnType("float");
+
+                    b.Property<double>("TotalAmount")
+                        .HasColumnType("float");
+
+                    b.Property<double>("UnitAmount")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerBillId");
+
+                    b.HasIndex("MerchantId");
+
+                    b.HasIndex("ProductUnitId");
+
+                    b.ToTable("CustomerBillItems");
+                });
+
+            modelBuilder.Entity("Models.CustomerBillType", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("NameAR")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NameEN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CustomerBillTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("71fffc17-d99d-425d-996b-1c2d2bd44e0a"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = false,
+                            NameAR = "تيكاوى",
+                            NameEN = "TEKAWAY",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = new Guid("1c800743-7156-4a6c-917b-4459e63e4f8a"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = false,
+                            NameAR = "دليفرى",
+                            NameEN = "DELIVERY",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = new Guid("426cac77-4148-448a-99cc-fb2e90995fbe"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = false,
+                            NameAR = "سفرة",
+                            NameEN = "TABLE",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
+                });
+
+            modelBuilder.Entity("Models.DeliveryPerson", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("MerchantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MerchantId");
+
+                    b.ToTable("DeliveryPersons");
+                });
+
+            modelBuilder.Entity("Models.Merchant", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("NameAR")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NameEN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Merchants");
+                });
+
+            modelBuilder.Entity("Models.Permission", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("MerchantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NameAR")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NameEN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserTypeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MerchantId");
+
+                    b.HasIndex("UserTypeId");
+
+                    b.ToTable("Permissions");
+                });
+
+            modelBuilder.Entity("Models.Printer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("MerchantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MerchantId");
+
+                    b.ToTable("Printers");
+                });
+
+            modelBuilder.Entity("Models.Product", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("MerchantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("PrinterId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProductGroupId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UnitId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MerchantId");
+
+                    b.HasIndex("PrinterId");
+
+                    b.HasIndex("ProductGroupId");
+
+                    b.HasIndex("UnitId");
+
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Models.ProductGroup", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("MerchantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SortValue")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MerchantId");
+
+                    b.ToTable("ProductGroups");
+                });
+
+            modelBuilder.Entity("Models.ProductTag", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("MerchantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MerchantId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductTags");
+                });
+
+            modelBuilder.Entity("Models.ProductTaxation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("MerchantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TaxationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MerchantId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("TaxationId");
+
+                    b.ToTable("ProductTaxations");
+                });
+
+            modelBuilder.Entity("Models.ProductUnit", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("MerchantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("UnitValueId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MerchantId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UnitValueId");
+
+                    b.ToTable("ProductUnits");
+                });
+
+            modelBuilder.Entity("Models.Role", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("MerchantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MerchantId");
+
+                    b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("Models.RolePermission", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("MerchantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PermissionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MerchantId");
+
+                    b.HasIndex("PermissionId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("RolePermissions");
+                });
+
+            modelBuilder.Entity("Models.Size", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("NameAR")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NameEN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sizes");
+                });
+
+            modelBuilder.Entity("Models.Taxation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("MaxValue")
+                        .HasColumnType("float");
+
+                    b.Property<Guid>("MerchantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("MinValue")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("TaxationTypeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("Value")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MerchantId");
+
+                    b.HasIndex("TaxationTypeId");
+
+                    b.ToTable("Taxations");
+                });
+
+            modelBuilder.Entity("Models.TaxationType", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TaxationTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("f7ed980b-9a9e-4cee-8b1e-e6146b3d01bd"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = false,
+                            Name = "PERCENT",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = new Guid("077d22f9-a8d4-436b-b249-8c92b7d985b1"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = false,
+                            Name = "FIXED",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
+                });
+
+            modelBuilder.Entity("Models.Unit", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("MerchantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("NameAR")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NameEN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MerchantId");
+
+                    b.ToTable("Units");
+                });
+
+            modelBuilder.Entity("Models.UnitValue", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("MerchantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UnitId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("Value")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MerchantId");
+
+                    b.ToTable("UnitValues");
                 });
 
             modelBuilder.Entity("Models.User", b =>
@@ -93,8 +879,20 @@ namespace DataAccessLayer.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsDeleted")
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
                         .HasColumnType("bit");
+
+                    b.Property<int>("Language")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("MerchantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("MobileNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -102,70 +900,648 @@ namespace DataAccessLayer.Migrations
                     b.Property<byte[]>("Password")
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<int>("Role")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserTypeId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("MerchantId");
+
+                    b.HasIndex("UserTypeId");
+
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Models.UserRole", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("MerchantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MerchantId");
+
+                    b.HasIndex("RoleId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserRoles");
+                });
+
+            modelBuilder.Entity("Models.UserType", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("NameAR")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NameEN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserTypes");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ffb9c802-865a-4517-994b-76ff2d010e9a"),
-                            CreatedAt = new DateTime(2021, 5, 24, 16, 44, 48, 528, DateTimeKind.Local).AddTicks(8216),
-                            IsDeleted = false,
-                            Name = "User 1",
-                            Role = 1,
-                            UpdatedAt = new DateTime(2021, 5, 24, 16, 44, 48, 528, DateTimeKind.Local).AddTicks(8822),
-                            Username = "user.1"
+                            Id = new Guid("bd41eca1-720a-48a4-9d4c-b70faa2ac9cf"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = false,
+                            NameAR = "مدير",
+                            NameEN = "ADMIN",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("182ea661-be2e-4c2e-9373-c9c4e604d36a"),
-                            CreatedAt = new DateTime(2021, 5, 24, 16, 44, 48, 528, DateTimeKind.Local).AddTicks(9890),
-                            IsDeleted = false,
-                            Name = "User 2",
-                            Role = 1,
-                            UpdatedAt = new DateTime(2021, 5, 24, 16, 44, 48, 528, DateTimeKind.Local).AddTicks(9898),
-                            Username = "user.2"
-                        },
-                        new
-                        {
-                            Id = new Guid("0bfd8d12-c569-47b6-8270-bc16e4c5b470"),
-                            CreatedAt = new DateTime(2021, 5, 24, 16, 44, 48, 528, DateTimeKind.Local).AddTicks(9903),
-                            IsDeleted = false,
-                            Name = "User 3",
-                            Role = 2,
-                            UpdatedAt = new DateTime(2021, 5, 24, 16, 44, 48, 528, DateTimeKind.Local).AddTicks(9905),
-                            Username = "user.3"
-                        },
-                        new
-                        {
-                            Id = new Guid("73e1a2a7-5d0e-4c3d-81d6-b7dc72c5c84f"),
-                            CreatedAt = new DateTime(2021, 5, 24, 16, 44, 48, 528, DateTimeKind.Local).AddTicks(9909),
-                            IsDeleted = false,
-                            Name = "User 4",
-                            Role = 2,
-                            UpdatedAt = new DateTime(2021, 5, 24, 16, 44, 48, 528, DateTimeKind.Local).AddTicks(9911),
-                            Username = "user.4"
-                        },
-                        new
-                        {
-                            Id = new Guid("fe82d001-7060-4e29-b037-bf21b984213a"),
-                            CreatedAt = new DateTime(2021, 5, 24, 16, 44, 48, 528, DateTimeKind.Local).AddTicks(9929),
-                            IsDeleted = true,
-                            Name = "User 5",
-                            Role = 2,
-                            UpdatedAt = new DateTime(2021, 5, 24, 16, 44, 48, 528, DateTimeKind.Local).AddTicks(9931),
-                            Username = "user.5"
+                            Id = new Guid("4d2739f0-5830-4206-8b6b-24e6f2efe7de"),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = false,
+                            NameAR = "كاشير",
+                            NameEN = "CASHER",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
+                });
+
+            modelBuilder.Entity("Models.Customer", b =>
+                {
+                    b.HasOne("Models.Merchant", "Merchant")
+                        .WithMany("Customers")
+                        .HasForeignKey("MerchantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Merchant");
+                });
+
+            modelBuilder.Entity("Models.CustomerAddress", b =>
+                {
+                    b.HasOne("Models.Customer", "Customer")
+                        .WithMany("CustomerAddresses")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Models.Merchant", "Merchant")
+                        .WithMany("CustomerAddresses")
+                        .HasForeignKey("MerchantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Merchant");
+                });
+
+            modelBuilder.Entity("Models.CustomerBill", b =>
+                {
+                    b.HasOne("Models.Channel", "Channel")
+                        .WithMany("CustomerBills")
+                        .HasForeignKey("ChannelId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Models.User", "CreatedByUser")
+                        .WithMany("CreatorCustomerBills")
+                        .HasForeignKey("CreatedByUserId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("Models.CustomerBillType", "CustomerBillType")
+                        .WithMany("CustomerBills")
+                        .HasForeignKey("CustomerBillTypeId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("Models.Customer", "Customer")
+                        .WithMany("CustomerBills")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Models.DeliveryPerson", "DeliveryPerson")
+                        .WithMany("CustomerBills")
+                        .HasForeignKey("DeliveryPersonId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("Models.Merchant", "Merchant")
+                        .WithMany("CustomerBills")
+                        .HasForeignKey("MerchantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Models.User", "PaymentReceivedByUser")
+                        .WithMany("ReceiverCustomerBills")
+                        .HasForeignKey("PaymentReceivedByUserId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Channel");
+
+                    b.Navigation("CreatedByUser");
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("CustomerBillType");
+
+                    b.Navigation("DeliveryPerson");
+
+                    b.Navigation("Merchant");
+
+                    b.Navigation("PaymentReceivedByUser");
+                });
+
+            modelBuilder.Entity("Models.CustomerBillItem", b =>
+                {
+                    b.HasOne("Models.CustomerBill", "CustomerBill")
+                        .WithMany("CustomerBillItems")
+                        .HasForeignKey("CustomerBillId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Models.Merchant", "Merchant")
+                        .WithMany("CustomerBillItems")
+                        .HasForeignKey("MerchantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Models.ProductUnit", "ProductUnit")
+                        .WithMany("CustomerBillItems")
+                        .HasForeignKey("ProductUnitId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("CustomerBill");
+
+                    b.Navigation("Merchant");
+
+                    b.Navigation("ProductUnit");
+                });
+
+            modelBuilder.Entity("Models.DeliveryPerson", b =>
+                {
+                    b.HasOne("Models.Merchant", "Merchant")
+                        .WithMany("DeliveryPersons")
+                        .HasForeignKey("MerchantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Merchant");
+                });
+
+            modelBuilder.Entity("Models.Permission", b =>
+                {
+                    b.HasOne("Models.Merchant", "Merchant")
+                        .WithMany("Permissions")
+                        .HasForeignKey("MerchantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Models.UserType", "UserType")
+                        .WithMany("Permissions")
+                        .HasForeignKey("UserTypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Merchant");
+
+                    b.Navigation("UserType");
+                });
+
+            modelBuilder.Entity("Models.Printer", b =>
+                {
+                    b.HasOne("Models.Merchant", "Merchant")
+                        .WithMany("Printers")
+                        .HasForeignKey("MerchantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Merchant");
+                });
+
+            modelBuilder.Entity("Models.Product", b =>
+                {
+                    b.HasOne("Models.Merchant", "Merchant")
+                        .WithMany("Products")
+                        .HasForeignKey("MerchantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Models.Printer", "Printer")
+                        .WithMany("Products")
+                        .HasForeignKey("PrinterId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Models.ProductGroup", "ProductGroup")
+                        .WithMany("Products")
+                        .HasForeignKey("ProductGroupId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Models.Unit", "Unit")
+                        .WithMany("Products")
+                        .HasForeignKey("UnitId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Merchant");
+
+                    b.Navigation("Printer");
+
+                    b.Navigation("ProductGroup");
+
+                    b.Navigation("Unit");
+                });
+
+            modelBuilder.Entity("Models.ProductGroup", b =>
+                {
+                    b.HasOne("Models.Merchant", "Merchant")
+                        .WithMany("ProductGroups")
+                        .HasForeignKey("MerchantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Merchant");
+                });
+
+            modelBuilder.Entity("Models.ProductTag", b =>
+                {
+                    b.HasOne("Models.Merchant", "Merchant")
+                        .WithMany("ProductTags")
+                        .HasForeignKey("MerchantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Models.Product", "Product")
+                        .WithMany("ProductTags")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Merchant");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Models.ProductTaxation", b =>
+                {
+                    b.HasOne("Models.Merchant", "Merchant")
+                        .WithMany("ProductTaxations")
+                        .HasForeignKey("MerchantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Models.Product", "Product")
+                        .WithMany("ProductTaxations")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Models.Taxation", "Taxation")
+                        .WithMany("ProductTaxations")
+                        .HasForeignKey("TaxationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Merchant");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Taxation");
+                });
+
+            modelBuilder.Entity("Models.ProductUnit", b =>
+                {
+                    b.HasOne("Models.Merchant", "Merchant")
+                        .WithMany("ProductUnits")
+                        .HasForeignKey("MerchantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Models.Product", "Product")
+                        .WithMany("ProductUnits")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Models.UnitValue", "UnitValue")
+                        .WithMany("ProductUnits")
+                        .HasForeignKey("UnitValueId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Merchant");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("UnitValue");
+                });
+
+            modelBuilder.Entity("Models.Role", b =>
+                {
+                    b.HasOne("Models.Merchant", "Merchant")
+                        .WithMany("Roles")
+                        .HasForeignKey("MerchantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Merchant");
+                });
+
+            modelBuilder.Entity("Models.RolePermission", b =>
+                {
+                    b.HasOne("Models.Merchant", "Merchant")
+                        .WithMany("RolePermissions")
+                        .HasForeignKey("MerchantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Models.Permission", "Permission")
+                        .WithMany("RolePermissions")
+                        .HasForeignKey("PermissionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Models.Role", "Role")
+                        .WithMany("RolePermissions")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Merchant");
+
+                    b.Navigation("Permission");
+
+                    b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("Models.Taxation", b =>
+                {
+                    b.HasOne("Models.Merchant", "Merchant")
+                        .WithMany("Taxations")
+                        .HasForeignKey("MerchantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Models.TaxationType", "TaxationType")
+                        .WithMany("Taxations")
+                        .HasForeignKey("TaxationTypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Merchant");
+
+                    b.Navigation("TaxationType");
+                });
+
+            modelBuilder.Entity("Models.Unit", b =>
+                {
+                    b.HasOne("Models.Merchant", "Merchant")
+                        .WithMany("Units")
+                        .HasForeignKey("MerchantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Merchant");
+                });
+
+            modelBuilder.Entity("Models.UnitValue", b =>
+                {
+                    b.HasOne("Models.Merchant", "Merchant")
+                        .WithMany("UnitValues")
+                        .HasForeignKey("MerchantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Models.Unit", "Unit")
+                        .WithMany("UnitValues")
+                        .HasForeignKey("MerchantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Merchant");
+
+                    b.Navigation("Unit");
+                });
+
+            modelBuilder.Entity("Models.User", b =>
+                {
+                    b.HasOne("Models.Merchant", "Merchant")
+                        .WithMany("Users")
+                        .HasForeignKey("MerchantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Models.UserType", "UserType")
+                        .WithMany("Users")
+                        .HasForeignKey("UserTypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Merchant");
+
+                    b.Navigation("UserType");
+                });
+
+            modelBuilder.Entity("Models.UserRole", b =>
+                {
+                    b.HasOne("Models.Merchant", "Merchant")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("MerchantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Models.Role", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Models.User", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Merchant");
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.Channel", b =>
+                {
+                    b.Navigation("CustomerBills");
+                });
+
+            modelBuilder.Entity("Models.Customer", b =>
+                {
+                    b.Navigation("CustomerAddresses");
+
+                    b.Navigation("CustomerBills");
+                });
+
+            modelBuilder.Entity("Models.CustomerBill", b =>
+                {
+                    b.Navigation("CustomerBillItems");
+                });
+
+            modelBuilder.Entity("Models.CustomerBillType", b =>
+                {
+                    b.Navigation("CustomerBills");
+                });
+
+            modelBuilder.Entity("Models.DeliveryPerson", b =>
+                {
+                    b.Navigation("CustomerBills");
+                });
+
+            modelBuilder.Entity("Models.Merchant", b =>
+                {
+                    b.Navigation("CustomerAddresses");
+
+                    b.Navigation("CustomerBillItems");
+
+                    b.Navigation("CustomerBills");
+
+                    b.Navigation("Customers");
+
+                    b.Navigation("DeliveryPersons");
+
+                    b.Navigation("Permissions");
+
+                    b.Navigation("Printers");
+
+                    b.Navigation("ProductGroups");
+
+                    b.Navigation("Products");
+
+                    b.Navigation("ProductTags");
+
+                    b.Navigation("ProductTaxations");
+
+                    b.Navigation("ProductUnits");
+
+                    b.Navigation("RolePermissions");
+
+                    b.Navigation("Roles");
+
+                    b.Navigation("Taxations");
+
+                    b.Navigation("Units");
+
+                    b.Navigation("UnitValues");
+
+                    b.Navigation("UserRoles");
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("Models.Permission", b =>
+                {
+                    b.Navigation("RolePermissions");
+                });
+
+            modelBuilder.Entity("Models.Printer", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("Models.Product", b =>
+                {
+                    b.Navigation("ProductTags");
+
+                    b.Navigation("ProductTaxations");
+
+                    b.Navigation("ProductUnits");
+                });
+
+            modelBuilder.Entity("Models.ProductGroup", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("Models.ProductUnit", b =>
+                {
+                    b.Navigation("CustomerBillItems");
+                });
+
+            modelBuilder.Entity("Models.Role", b =>
+                {
+                    b.Navigation("RolePermissions");
+
+                    b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("Models.Taxation", b =>
+                {
+                    b.Navigation("ProductTaxations");
+                });
+
+            modelBuilder.Entity("Models.TaxationType", b =>
+                {
+                    b.Navigation("Taxations");
+                });
+
+            modelBuilder.Entity("Models.Unit", b =>
+                {
+                    b.Navigation("Products");
+
+                    b.Navigation("UnitValues");
+                });
+
+            modelBuilder.Entity("Models.UnitValue", b =>
+                {
+                    b.Navigation("ProductUnits");
+                });
+
+            modelBuilder.Entity("Models.User", b =>
+                {
+                    b.Navigation("CreatorCustomerBills");
+
+                    b.Navigation("ReceiverCustomerBills");
+
+                    b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("Models.UserType", b =>
+                {
+                    b.Navigation("Permissions");
+
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

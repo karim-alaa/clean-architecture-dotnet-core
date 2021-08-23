@@ -1,6 +1,10 @@
-﻿using AutoMapper;
+﻿using Models.ViewModels;
+using AutoMapper;
 using Models;
-using Models.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace APIs.AutoMapperConfig
 {
@@ -8,8 +12,9 @@ namespace APIs.AutoMapperConfig
     {
         public AutoMapperProfile()
         {
-            // Book
-            CreateMap<Book, VmBook>();
+            // ProductGroup
+            CreateMap<ProductGroup, VmProductGroup>();
+            CreateMap<VmProductGroupCreate, VmProductGroup>();
 
             // User
             CreateMap<User, VmUser>();

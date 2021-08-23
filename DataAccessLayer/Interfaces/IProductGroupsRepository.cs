@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Interfaces
 {
-    public interface IBooksRepository : IGenericRepository<Book>
+    public interface IProductGroupsRepository : IGenericRepository<ProductGroup>
     {
-        Task<Book> GetBookById(Guid Id);
-        Task<List<Book>> GetAllBooks();
+        Task<ProductGroup> UpdateRangeSort(List<ProductGroup> productGroups);
     }
 }

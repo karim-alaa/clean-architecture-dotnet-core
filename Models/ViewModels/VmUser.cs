@@ -1,4 +1,5 @@
-﻿using SharedConfig.Messages;
+﻿using SharedConfig.Constants;
+using SharedConfig.Messages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,24 +14,75 @@ namespace Models.ViewModels
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Username { get; set; }
-        public int Role { get; set; }
-        public bool IsDeleted { get; set; }
+        public string Email { get; set; }
+        public AppLanguages Language { get; set; }
+        public string MobileNumber { get; set; }
+        public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+
+        public Guid UserTypeId { get; set; }
+        public Guid MerchantId { get; set; }
     }
 
     public class VmUserCreate
     {
-        [Required(ErrorMessage = Errors.E_NAME_IS_REQUIRED)]
+        [Required]
         [NameValidator]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = Errors.E_USERNAME_IS_REQUIRED)]
+        [Required]
         [UsernameValidator]
         public string Username { get; set; }
 
-        [Required(ErrorMessage = Errors.E_PASSWORD_IS_REQUIRED)]
+        [Required]
+        public AppLanguages Language { get; set; }
+
+        [Required]
         [PasswordValidator]
         public string Password { get; set; }
+
+        [Required]
+        [EmailValidator]
+        public string Email { get; set; }
+
+        [Required]
+        [PhoneValidator]
+        public string MobileNumber { get; set; }
+
+        [Required]
+        public Guid UserTypeId { get; set; }
+    }
+
+    public class VmUserUpdate
+    {
+        [RequiredValidator]
+        public Guid Id { get; set; }
+
+        [RequiredValidator]
+        [NameValidator]
+        public string Name { get; set; }
+
+        [RequiredValidator]
+        [UsernameValidator]
+        public string Username { get; set; }
+
+        [RequiredValidator]
+        public AppLanguages Language { get; set; }
+
+        [RequiredValidator]
+        [PasswordValidator]
+        public string Password { get; set; }
+
+        [RequiredValidator]
+        [EmailValidator]
+        public string Email { get; set; }
+
+        [RequiredValidator]
+        [PhoneValidator]
+        public string MobileNumber { get; set; }
+
+        [RequiredValidator]
+        public Guid UserTypeId { get; set; }
     }
 }

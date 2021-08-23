@@ -1,52 +1,40 @@
-﻿using AutoMapper;
-using GlobalHelpers.Helpers;
-using Microsoft.AspNetCore.Mvc;
-using Models;
-using Models.ViewModels;
-using Services.Interfaces;
-using SharedConfig.Messages;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using Models;
+using Services.Interfaces;
+using AutoMapper;
+using GlobalHelpers.Helpers;
+using SharedConfig.Messages;
+using Models.ViewModels;
+using APIs.Utilities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace APIs.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class UsersController : AppController
     {
         private readonly IMapper _mapper;
         private readonly IUserService _userService;
-        public UsersController(IMapper Mapper, IUserService UserService)
+        public UsersController(IMapper Mapper,IUserService UserService)
         {
-            this._mapper = Mapper;
-            this._userService = UserService;
+            _mapper = Mapper;
+            _userService = UserService;
         }
 
         [HttpPost]
         [Route("Create")]
-        public async Task<IActionResult> CreateUser([FromBody] VmUserCreate vmUserCreate)
+        [Authorize]
+        public async Task<GResponse<VmUser>> CreateUser([FromBody] VmUserCreate vmUserCreate)
         {
-            if (ModelState.IsValid)
+            return await ExceptionHandler(async () =>
             {
-                try
-                {
-                    User createdUser = await _userService.CreateUser(vmUserCreate);
-                    VmUser vmUser = _mapper.Map<VmUser>(createdUser);
-                    return Ok(DataMessage.Data(vmUser));
-                }
-                catch (AppException ex)
-                {
-                    return BadRequest(ex.ReturnBadRequest());
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest(AppException.ReturnBadRequest(ex.Message));
-                }
-            }
-            else
-            {
-                return BadRequest(AppException.ReturnBadRequest(ModelState));
-            }
+                User createdUser = await _userService.CreateUser(vmUserCreate);
+                VmUser vmUser = _mapper.Map<VmUser>(createdUser);
+                return Ok(vmUser);
+            });
         }
     }
 }

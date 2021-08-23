@@ -11,7 +11,6 @@ namespace Models.ViewModels
     public class VmLoginRequest
     {
         [Required(ErrorMessage = Errors.E_USERNAME_IS_REQUIRED)]
-        [NameValidator]
         public string UserName { get; set; }
         [Required(ErrorMessage = Errors.E_PASSWORD_IS_REQUIRED)]
         public string Password { get; set; }

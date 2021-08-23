@@ -10,7 +10,7 @@ namespace Services
     {
         public static IServiceCollection RegisterServiceLayer(this IServiceCollection services)
         {
-            services.AddScoped<IBookService, BookService>();
+            services.AddScoped<IProductGroupService, ProductGroupService>();
             services.AddScoped<ISecurityService, SecurityService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IMailService, MailService>();

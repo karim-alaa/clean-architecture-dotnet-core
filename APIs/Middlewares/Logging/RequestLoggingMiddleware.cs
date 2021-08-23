@@ -6,7 +6,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SharedConfig.Middlewares.Logging
+namespace APIs.Middlewares.Logging
 {
     public class RequestLoggingMiddleware
     {
@@ -20,8 +20,7 @@ namespace SharedConfig.Middlewares.Logging
 
         public async Task InvokeAsync(HttpContext context)
         {
-            if (string.IsNullOrEmpty(context.Request.Path.Value) || !context.Request.Path.Value.Contains("/api/"))
-            {
+            if (string.IsNullOrEmpty(context.Request.Path.Value) || !context.Request.Path.Value.Contains("/api/")) { 
                 await _next(context);
                 return;
             }
@@ -30,7 +29,7 @@ namespace SharedConfig.Middlewares.Logging
             string resBody = "";
             try
             {
-
+                
                 // Leave the body open so the next middleware can read it.
                 using var reader = new StreamReader(
                 context.Request.Body,
@@ -43,10 +42,10 @@ namespace SharedConfig.Middlewares.Logging
 
                 // Reset the request body stream position so the next middleware can read it
                 context.Request.Body.Position = 0;
-
+                
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) 
+            { 
                 Console.WriteLine($"Error While Loggaing: {ex.Message}");
                 _logger.Error("{ResBody}", ex.Message);
             }
@@ -82,25 +81,25 @@ namespace SharedConfig.Middlewares.Logging
                     "{ResHead}" +
                     "{ResBody}";
 
-                object[] logData = new object[] {
+                object[] logData =  new object[] {
                     context.Request?.Method,
                     context.Response.StatusCode,
                     context.Request?.Path.Value,
                     JsonConvert.SerializeObject(context.Request?.Headers),
                     reqBody,
                     JsonConvert.SerializeObject(context.Response?.Headers),
-                    resBody
+                    resBody 
                 };
 
                 if (context.Response?.StatusCode >= 200 && context.Response?.StatusCode < 400)
                     _logger.Information(messageTemplate, logData);
 
-                if (context.Response?.StatusCode >= 400 && context.Response?.StatusCode < 500)
+                else if (context.Response?.StatusCode >= 400 && context.Response?.StatusCode < 500)
                     _logger.Error(messageTemplate, logData);
 
-                if (context.Response?.StatusCode >= 500)
+                else if (context.Response?.StatusCode >= 500)
                     _logger.Fatal(messageTemplate, logData);
-
+   
             }
         }
     }

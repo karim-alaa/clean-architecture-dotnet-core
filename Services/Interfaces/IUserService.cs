@@ -12,5 +12,6 @@ namespace Services.Interfaces
     {
         Task<User> ValidateUserToLogin(string username, string password);
         Task<User> CreateUser(VmUserCreate vmUserCreate);
+        string GenerateUserToken(User user);
     }
 }

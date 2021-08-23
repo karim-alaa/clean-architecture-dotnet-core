@@ -23,3 +23,4 @@ Version  | .Net 5.0
 ##### Custom Validation Layers
 ##### Unified Error Format
 ##### Ready-To-Use Mail Service
+##### Generic Response

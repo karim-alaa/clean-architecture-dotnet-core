@@ -14,7 +14,7 @@ namespace ValidationLayer.Validators
                 return true;
 
             ErrorMessage = Errors.E_PASSWORD_NOT_VALID;
-            bool isValid = value.ToString().Length > AppValidations.PASSWORD_MIN_LENGTH && value.ToString().Length < AppValidations.PASSWORD_MAX_LENGTH;
+            bool isValid = value.ToString().Length >= AppValidations.PASSWORD_MIN_LENGTH && value.ToString().Length < AppValidations.PASSWORD_MAX_LENGTH;
 
             bool isFormatValid = !Regex.Match(value.ToString(),
                                  @"[ ]+")

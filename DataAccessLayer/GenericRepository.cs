@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class, new()
+    public class GenericRepository<TEntity> where TEntity : class, new()//: IGenericRepository<TEntity> 
     {
-        protected readonly DbContext dbContext;
-        private readonly AppConfig _config;
-        public GenericRepository(DbContext DbContext, AppConfig config)
+        protected readonly DBContext dbContext;
+        protected readonly AppConfig _config;
+        public GenericRepository(DBContext DbContext, AppConfig config)
         {
             dbContext = DbContext;
             _config = config;
@@ -25,14 +25,34 @@ namespace DataAccessLayer
             return (await dbContext.Set<TEntity>().AddAsync(entity)).Entity;
         }
 
+        public async Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return await dbContext.Set<TEntity>().Where(predicate).CountAsync();
+        }
+
+        public async Task<int> CountAsync()
+        {
+            return await dbContext.Set<TEntity>().CountAsync();
+        }
+
         public async Task<TEntity> FindAsync(params object[] predicate)
         {
             return await dbContext.Set<TEntity>().FindAsync(predicate);
         }
 
+        public TEntity Update(TEntity entity)
+        {
+            return dbContext.Set<TEntity>().Update(entity).Entity;
+        }
+
         public IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate)
         {
             return dbContext.Set<TEntity>().Where(predicate);
+        }
+
+        public async Task<List<TEntity>> GetAllAsync()
+        {
+            return await dbContext.Set<TEntity>().ToListAsync();
         }
     }
 }

@@ -13,10 +13,10 @@ namespace DataAccessLayer
     {
         public static IServiceCollection RegisterDataAccessLayer(this IServiceCollection services, string connectionString)
         {
-            services.AddScoped<IBooksRepository, BooksRepository>();
+            services.AddScoped<IProductGroupsRepository, ProductGroupsRepository>();
             services.AddScoped<IUsersRepository, UsersRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();          
-            services.AddDbContext<DBContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<DBContext>(options => options.UseSqlServer(connectionString), ServiceLifetime.Scoped);
             return services;
         }
     }

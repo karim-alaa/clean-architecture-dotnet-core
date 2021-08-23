@@ -1,9 +1,13 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Quartz;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
-namespace RechargeAutoAction.Jobs.ManageRechargeCases
+namespace APIs.Jobs.ManageRechargeCases
 {
     [DisallowConcurrentExecution]
     public class StayAliveJob : IJob

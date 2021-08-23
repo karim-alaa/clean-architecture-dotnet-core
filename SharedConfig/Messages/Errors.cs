@@ -19,5 +19,13 @@ namespace SharedConfig.Messages
         public const string E_USERNAME_IS_REQUIRED = "E_USERNAME_IS_REQUIRED";
         public const string E_PASSWORD_IS_REQUIRED = "E_PASSWORD_IS_REQUIRED";
         public const string E_NAME_IS_REQUIRED = "E_NAME_IS_REQUIRED";
+        public const string E_MOBILE_IS_REQUIRED = "E_MOBILE_IS_REQUIRED";
+        public const string E_EMAIL_IS_REQUIRED = "E_EMAIL_IS_REQUIRED";
+        public const string E_USER_TYPE_ID_IS_REQUIRED = "E_USER_TYPE_ID_IS_REQUIRED";
+        public const string E_ID_IS_REQUIRED = "E_ID_IS_REQUIRED";
+        public const string E_LANGUAGE_IS_REQUIRED = "E_LANGUAGE_IS_REQUIRED";
+
+        public const string E_SOMETHING_WENT_WRONG = "E_SOMETHING_WENT_WRONG";
+        public const string E_AN_ERROR_OCCURRED = "E_AN_ERROR_OCCURRED";
     }
 }

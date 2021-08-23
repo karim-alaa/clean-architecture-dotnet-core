@@ -7,7 +7,7 @@ namespace DataAccessLayer.Interfaces
 {
     public interface IUnitOfWork
     {
-        IBooksRepository BooksRepository { get; }
+        IProductGroupsRepository ProductGroupsRepository { get; }
         IUsersRepository UsersRepository { get; }
 
         Task<int> SaveChangesAsync();

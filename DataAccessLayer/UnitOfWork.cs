@@ -8,12 +8,12 @@ namespace DataAccessLayer
     public class UnitOfWork : IUnitOfWork
     {
         public DBContext DBContext { get; }
-        public IBooksRepository BooksRepository { get; }
+        public IProductGroupsRepository ProductGroupsRepository { get; }
         public IUsersRepository UsersRepository { get; }
-        public UnitOfWork(DBContext BooksDBContext, IBooksRepository BooksRepository, IUsersRepository UsersRepository)
+        public UnitOfWork(DBContext POSDBContext, IProductGroupsRepository ProductGroupsRepository, IUsersRepository UsersRepository)
         {
-            this.DBContext = BooksDBContext;
-            this.BooksRepository = BooksRepository;
+            DBContext = POSDBContext;
+            this.ProductGroupsRepository = ProductGroupsRepository;
             this.UsersRepository = UsersRepository;
         }
 
